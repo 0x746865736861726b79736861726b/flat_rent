@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.media}} 
+    {{form.content}}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.4.1/tinymce.min.js"></script>
+{% endblock content %}
+    

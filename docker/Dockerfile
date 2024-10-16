@@ -1,4 +1,4 @@
-from python:3.12.4-bookworm
+FROM python:3.12.4-bookworm
 
 ENV PYTHONUNBUFFERED 1
 
@@ -7,6 +7,7 @@ RUN apt-get install postgresql-client -y
 
 WORKDIR /app
 
+COPY contract/build/contracts/UsersContract.json /app/abi/UsersContract.json
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 

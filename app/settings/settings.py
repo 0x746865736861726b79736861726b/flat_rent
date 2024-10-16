@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "allauth",
     "allauth.account",
+    "tinymce",
     "base",
     "users",
+    "flat",
 ]
 
 MIDDLEWARE = [

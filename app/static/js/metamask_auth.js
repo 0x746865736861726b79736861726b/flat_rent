@@ -17,8 +17,9 @@ async function authenticateWithMetaMask() {
             });
 
             const data = await response.json();
-            if (data.success) {
+            if (data.success && data.redirect_url) {
                 console.log('Аутентифікація успішна!');
+                window.location.href = data.redirect_url;
             } else {
                 console.log('Аутентифікація не вдалася');
             }
