@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row">
+        <div class="col-12">
+            {% if flats %}
+            {% for flat in flats %}
+            <div class="flat-card">
+                <!-- Image Slider Section -->
+                <div class="image-section">
+                    <div id="carouselFlat{{ flat.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in flat.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100 limited-size" alt="Flat Image">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFlat{{ flat.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselFlat{{ flat.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Details Section -->
+                <div class="details-section">
+                    <h2 class="h4">{{ flat.name }}</h2>
+                    <p>{{ flat.address }}</p>
+                    <!-- <p class="flat-price">{{ flat.price }} грн.</p> -->
+
+                    <!-- Description with Read More/Less -->
+                    <div class="text-clamp" id="short_{{ flat.id }}">
+                        {{ flat.description|safe|truncatewords:15 }}
+                        <a href="{% url 'flat:detail' flat.id %}">Read more</a>
+                    </div>
+
+                    <!-- Date and Other Details -->
+                    <p class="text-muted d-flex align-items-center">
+                        <i class="bi bi-calendar-event me-2"></i>{{ flat.created_at|date:"d M Y" }}
+                    </p>
+                    
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="d-flex justify-content-center">No flats found</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        let flatId = this.parentNode.id.split('_')[1];
+        document.getElementById('short_' + flatId).style.display = 
+          document.getElementById('short_' + flatId).style.display === 'none' ? 'block' : 'none';
+        document.getElementById('full_' + flatId).style.display = 
+          document.getElementById('full_' + flatId).style.display === 'none' ? 'block' : 'none';
+      });
+    });
+</script>
+{% endblock content %}

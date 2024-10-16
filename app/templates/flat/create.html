@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.media}} 
-    {{form.content}}
-    {{ form.as_p }}
+    {{ form.media }} 
+    {{ form.content }}
+    {{ form|crispy }}
+    <h3>Upload images:</h3>
+    <div id="image-formset">
+        <div class="image-form">
+            {{ image_form|crispy }}
+        </div>
+    </div>
+    
+    <button type="button" id="add-image">Add another image</button>
     <input type="submit" value="Submit">
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.4.1/tinymce.min.js"></script>
