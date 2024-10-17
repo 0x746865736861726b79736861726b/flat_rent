@@ -164,3 +164,5 @@ cython_debug/
 #.idea/
 # IPFS 
 data/
+# MEDIA FILES
+app/media/
