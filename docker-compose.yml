@@ -1,15 +1,48 @@
 services:
-  web:
+  django: &django
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: compose/Dockerfile
+    depends_on:
+      - redis
     ports:
      -  "8000:8000"
     volumes:
      - .:/app
+    env_file:
+      - .env
     restart: always
-    command: python app/manage.py runserver 0.0.0.0:8000
+    command: /start
 
+  redis:
+    image: redis:latest
+    container_name: redis
+
+  celeryworker:
+    <<: *django
+    image: etherium_local_celeryworker
+    container_name: etherium_local_celeryworker
+    depends_on:
+      - redis
+    ports: []
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: etherium_local_celerybeat
+    container_name: etherium_local_celerybeat
+    depends_on:
+      - redis
+    ports: []
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: etherium_local_flower
+    container_name: etherium_local_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower
 #  ipfs:
 #    image: ipfs/go-ipfs
 #    container_name: ipfs
