@@ -8,8 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponseRedirect
 
-from users.factory import get_user_manager
-from users.services.auth.auth import MetaMaskAuthService
+from app.users.factory import get_user_manager
+from app.users.services.auth.auth import MetaMaskAuthService
 
 
 @method_decorator(csrf_exempt, name="dispatch")

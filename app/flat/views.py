@@ -1,8 +1,8 @@
 from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render
 
-from flat.models import Flat, FlatImage
-from flat.forms import FlatForm, FlatImageForm
+from app.flat.models import Flat, FlatImage
+from app.flat.forms import FlatForm, FlatImageForm
 
 
 class FlatCreateView(View):

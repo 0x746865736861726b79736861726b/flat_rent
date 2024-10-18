@@ -1,7 +1,7 @@
 from django import forms
 from tinymce.widgets import TinyMCE
 
-from flat.models import Flat, FlatImage
+from app.flat.models import Flat, FlatImage
 
 
 class FlatForm(forms.ModelForm):

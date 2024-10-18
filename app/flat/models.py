@@ -1,8 +1,8 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
-from common.models import BaseModel
-from flat.managers import AvailableFlatManager
+from app.common.models import BaseModel
+from app.flat.managers import AvailableFlatManager
 
 
 class Flat(BaseModel):
