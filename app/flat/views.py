@@ -1,5 +1,5 @@
-from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render
+from django.views.generic import View, ListView, DetailView
 
 from app.flat.models import Flat, FlatImage
 from app.flat.forms import FlatForm, FlatImageForm
@@ -10,7 +10,7 @@ class FlatCreateView(View):
     image_form_class = FlatImageForm
     template_name = "flat/create.html"
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
 
         return render(
             request,

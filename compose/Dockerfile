@@ -12,6 +12,8 @@ RUN apt-get install postgresql-client -y
 WORKDIR ${APP_HOME}
 
 COPY contract/build/contracts/UsersContract.json /app/abi/UsersContract.json
+COPY contract/build/contracts/RealEstate.json /app/abi/RealEstate.json
+
 COPY requirements.txt ${APP_HOME}
 RUN pip install -r requirements.txt
 
